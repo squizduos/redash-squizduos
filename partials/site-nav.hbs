@@ -1,0 +1,37 @@
+<nav class="site-nav">
+    <div class="site-nav-left">
+        {{#if @site.logo}}
+            <a class="site-nav-logo" href="{{@site.url}}"><img src="{{@site.logo}}" alt="{{@site.title}}" /></a>
+        {{/if}}
+        <a style="font-size: 2rem; color: black;" href="{{@site.url}}">
+            {{@site.title}}
+        </a>
+        &nbsp;    
+        <a class="social-link social-link-tg" href="https://telete.in/ch_11" title="Telegram" target="_blank" rel="noopener" style="margin-right: 40px;">{{> "icons/telegram"}}</a>    
+        {{#if @site.navigation}}
+            {{navigation}}
+        {{/if}}
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            <a class="social-link social-link-tg" href="https://telete.in/squizduos" title="Telegram" target="_blank" rel="noopener">{{> "icons/telegram"}}</a>
+            
+            {{#if @site.facebook}}
+                <a class="social-link social-link-fb" href="{{facebook_url @site.facebook}}" title="Facebook" target="_blank" rel="noopener">{{> "icons/facebook"}}</a>
+            {{/if}}
+            {{#if @site.twitter}}
+                <a class="social-link social-link-tw" href="{{twitter_url @site.twitter}}" title="Twitter" target="_blank" rel="noopener">{{> "icons/twitter"}}</a>
+            {{/if}}
+
+            <a class="social-link social-link-vk" href="https://vk.com/squizduos" title="VK" target="_blank" rel="noopener">{{> "icons/vk"}}</a>
+            <a class="social-link social-link-in" href="https://instagram.com/squizduos" title="Instagram" target="_blank" rel="noopener">{{> "icons/instagram"}}</a>
+
+            <a class="social-link social-link-gh" href="https://github.com/squizduos" title="Github" target="_blank" rel="noopener">{{> "icons/github"}}</a>
+        </div>
+        {{#if @labs.subscribers}}
+            <a class="subscribe-button" href="#subscribe">Subscribe</a>
+        {{else}}
+            <a class="rss-button" href="https://{{@site.url}}/rss/" title="RSS" target="_blank" rel="noopener">{{> "icons/rss"}}</a>
+        {{/if}}
+    </div>
+</nav>
