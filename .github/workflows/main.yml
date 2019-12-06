@@ -1,0 +1,35 @@
+name: Deploy Theme
+
+on:
+  push:	
+    branches:	
+      - master
+      
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: send custom message while finished
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: html
+          message: |
+            <b>Gitlab Actions notification from</b> ${{ secrets.TELEGRAM_NAME }} ${{ secrets.TELEGRAM_USERNAME }}
+            Workflow <code>${{ github.workflow }}</code> for repo <code>{{ repo }}</code>
+            Commit SHA <code>{{ commit.sha }}</code> with ref <code>{{ commit.ref }}</code>
+      - uses: actions/checkout@master
+      - uses: TryGhost/action-deploy-theme@v1.0.0
+        with:
+          api-url: ${{ secrets.GHOST_ADMIN_API_URL }}
+          api-key: ${{ secrets.GHOST_ADMIN_API_KEY }}
+      - name: send custom message while finished
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_RECIPIENT }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          message: |
+            Gitlab Actions workflow `${{ github.workflow }}` finished for repository `{{ repo }}`.
+            Commit SHA -- `{{ commit.sha }}`, ref `{{ commit.ref }}`.
